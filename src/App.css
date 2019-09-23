@@ -1,0 +1,16 @@
+.App {
+  padding: 10px;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  margin-bottom: 120px;
+}
+a {
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 20px;
+}
+.App h1 {
+  text-align: center;
+}
