@@ -30,8 +30,8 @@ const initialState = {
   ],
 }
 
-const todoAppReducer = (state = initialState, action) => {
+const todos = (state = initialState, action) => {
   return state
 }
 
-export default todoAppReducer
+export default todos

@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Task from './Task'
 
-const mapStateToProps = ({ todoAppReducer }) => {
+const mapStateToProps = ({ todos }) => {
   return {
-    tasks: todoAppReducer.tasks,
+    tasks: todos.tasks,
   }
 }
 
