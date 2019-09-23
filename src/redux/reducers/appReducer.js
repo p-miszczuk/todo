@@ -1,3 +1,5 @@
+import { REMOVE_TASK, ADD_TASK } from '../data/data'
+
 const initialState = {
   tasks: [
     {
@@ -30,8 +32,16 @@ const initialState = {
   ],
 }
 
-const todoAppReducer = (state = initialState, actions) => {
-  return state
+const todoAppReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case REMOVE_TASK:
+      return {
+        tasks: state.tasks.filter(task => task.id !== action.payload),
+      }
+
+    default:
+      return state
+  }
 }
 
 export default todoAppReducer
