@@ -32,7 +32,7 @@ const initialState = {
   ],
 }
 
-const todoAppReducer = (state = initialState, action) => {
+const todos = (state = initialState, action) => {
   switch (action.type) {
     case REMOVE_TASK:
       return {
@@ -44,4 +44,4 @@ const todoAppReducer = (state = initialState, action) => {
   }
 }
 
-export default todoAppReducer
+export default todos

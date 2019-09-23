@@ -1,7 +1,7 @@
 import React from 'react'
-import './taskStyle.css'
+import './taskStyle.scss'
 
-const Task = props => {
+const Task = ({ remove, task }) => {
   const {
     id,
     name,
@@ -10,8 +10,8 @@ const Task = props => {
     description,
     comments,
     priority,
-  } = props.task
-  const { remove } = props
+  } = task
+
   return (
     <div className="task">
       <div className="task__header">

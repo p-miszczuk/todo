@@ -1,6 +1,7 @@
-import { createStore } from 'redux'
-import todoAppReducer from '../reducers/appReducer'
+import { createStore, combineReducers } from 'redux'
+import todos from '../reducers/appReducer'
 
-const store = createStore(todoAppReducer)
+const rootReducer = combineReducers({ todos })
+const store = createStore(rootReducer)
 
 export default store

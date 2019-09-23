@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import Task from './Task'
 import { removeTask } from '../redux/actions/appActions'
 
-const mapStateToProps = ({ tasks }) => {
-  return { tasks }
+const mapStateToProps = ({ todos }) => {
+  return { tasks: todos.tasks }
 }
 
 const mapDispatchToProps = dispatch => {
