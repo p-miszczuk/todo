@@ -25,7 +25,7 @@ const initialState = {
       done: false,
       description: 'Meeting with Anna and John',
       comments: 'Dance Club',
-      priority: 'high',
+      priority: 'medium',
     },
   ],
 }
