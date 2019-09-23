@@ -30,7 +30,7 @@ const initialState = {
   ],
 }
 
-const todoAppReducer = (state = initialState, actions) => {
+const todoAppReducer = (state = initialState, action) => {
   return state
 }
 

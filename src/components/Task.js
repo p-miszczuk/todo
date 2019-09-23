@@ -1,7 +1,7 @@
 import React from 'react'
 import './taskStyle.css'
 
-const Task = props => {
+const Task = ({ task }) => {
   const {
     name,
     timestamp,
@@ -9,7 +9,7 @@ const Task = props => {
     description,
     comments,
     priority,
-  } = props.task
+  } = task
   return (
     <div className="task">
       <div className="task__header">

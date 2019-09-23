@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Task from './Task'
 
-const mapStateToProps = ({ tasks }) => {
-  return { tasks }
+const mapStateToProps = ({ todoAppReducer }) => {
+  return {
+    tasks: todoAppReducer.tasks,
+  }
 }
 
 const List = ({ tasks }) => (
@@ -28,7 +30,4 @@ const List = ({ tasks }) => (
   </div>
 )
 
-export default connect(
-  mapStateToProps,
-  null,
-)(List)
+export default connect(mapStateToProps)(List)
