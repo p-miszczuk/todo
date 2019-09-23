@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Task from './Task'
+import AppPoup from './Popup/AddPopup'
 import { removeTask } from '../redux/actions/appActions'
 
 const mapStateToProps = ({ todos }) => {
@@ -36,6 +37,7 @@ class List extends PureComponent {
             width: '500px',
           }}
         >
+          <AppPoup />
           {tasks.map(task => (
             <Task
               key={task.id}

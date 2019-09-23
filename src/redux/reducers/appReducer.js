@@ -36,6 +36,7 @@ const todos = (state = initialState, action) => {
   switch (action.type) {
     case REMOVE_TASK:
       return {
+        ...state,
         tasks: state.tasks.filter(task => task.id !== action.payload),
       }
 
