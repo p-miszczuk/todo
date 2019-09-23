@@ -7,9 +7,20 @@ const mapStateToProps = ({ tasks }) => {
 }
 
 const List = ({ tasks }) => (
-  <div>
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}
+  >
     <h2>Tasks</h2>
-    <div className="tasks">
+    <div
+      className="tasks"
+      style={{
+        width: '500px',
+      }}
+    >
       {tasks.map(task => (
         <Task key={task.id} task={task} />
       ))}
