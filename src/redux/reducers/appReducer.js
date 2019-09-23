@@ -1,5 +1,5 @@
 const initialState = {
-  list: [
+  tasks: [
     {
       id: 1,
       name: 'Clean the car',
