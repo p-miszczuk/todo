@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
-import Form from '../Form'
+import Form from '../Forms/Form'
 import './popupStyle.scss'
 
 class AddTaskPopup extends PureComponent {
@@ -72,7 +72,7 @@ class AddTaskPopup extends PureComponent {
       <div className={classnames}>
         <div className="add-task">
           <div className="add-task__close" onClick={closePopup}>
-            +
+            &times;
           </div>
           <h2>Create new task</h2>
           <Form

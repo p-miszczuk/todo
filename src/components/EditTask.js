@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { editTask } from '../redux/reducers/todos/action'
-import Form from './Form'
+import Form from './Forms/Form'
 
 const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
 
@@ -27,7 +27,8 @@ class EditTask extends PureComponent {
   handleSubmit = event => {
     event.preventDefault()
     const { id, name, description, comment, priority } = this.state
-    const { edit } = this.props
+    const { edit, history } = this.props
+
     const task = {
       id,
       name,
@@ -37,6 +38,7 @@ class EditTask extends PureComponent {
       priority,
     }
     edit(task)
+    history.push('/list/')
   }
 
   handleClearForm = () => {

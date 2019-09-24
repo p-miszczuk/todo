@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Task from './Task'
+import Task from './Task/Task'
 import AppPoup from './Popup'
 import MainButton from './Buttons/MainButton'
 import { removeTask, addTask } from '../redux/reducers/todos/action'

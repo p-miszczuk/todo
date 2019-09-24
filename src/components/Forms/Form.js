@@ -1,7 +1,6 @@
 import React from 'react'
-import Input from './Popup/Input'
-import MainButton from '../components/Buttons/MainButton'
-import EditTask from './EditTask'
+import Input from './Input'
+import MainButton from '../Buttons/MainButton'
 
 const Form = ({
   name,

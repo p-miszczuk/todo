@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './taskStyle.scss'
 
-const Task = ({ handleRemove, task, handleEdit, setOneTask }) => {
+const Task = ({ handleRemove, task, setOneTask }) => {
   const {
     id,
     name,
@@ -26,7 +26,7 @@ const Task = ({ handleRemove, task, handleEdit, setOneTask }) => {
           className="task__remove"
           onClick={() => handleRemove(id)}
         >
-          +
+          &times;
         </div>
       </div>
       <div className="task__descrition">{description}</div>

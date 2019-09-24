@@ -17,7 +17,7 @@ $taskBorder: 1px solid #cccccc;
   }
   &__edit {
     align-self: flex-end;
-    margin-bottom: 11px;
+    margin-bottom: 9px;
     font-size: 18px;
     cursor: pointer;
   }
@@ -25,7 +25,6 @@ $taskBorder: 1px solid #cccccc;
     align-self: flex-end;
     font-size: 30px;
     margin: 0px 10px 0 15px;
-    transform: rotate(45deg);
     cursor: pointer;
   }
   &__descrition {
