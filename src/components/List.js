@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Task from './Task'
 import AppPoup from './Popup'
 import MainButton from './Buttons/MainButton'
-import { removeTask, addTask } from '../redux/actions/appActions'
+import { removeTask, addTask } from '../redux/reducers/todos/action'
 
 const mapStateToProps = ({ todos }) => {
   return { tasks: todos.tasks }
@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   add: task => dispatch(addTask(task)),
 })
 
-class List extends PureComponent {
+class List extends React.Component {
   state = {
     showPopup: false,
   }
@@ -62,7 +62,7 @@ class List extends PureComponent {
             <Task
               key={task.id}
               task={task}
-              remove={this.handleRemoveTask}
+              handleRemove={this.handleRemoveTask}
             />
           ))}
           <AppPoup

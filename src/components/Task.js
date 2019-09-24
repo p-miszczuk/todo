@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './taskStyle.scss'
 
-const Task = ({ remove, task }) => {
+const Task = ({ handleRemove, task, handleEdit }) => {
   const {
     id,
     name,
@@ -11,14 +12,18 @@ const Task = ({ remove, task }) => {
     comments,
     priority,
   } = task
-
   return (
     <div className="task">
       <div className="task__header">
         <input type="checkBox" name="isDone" />
         <div className="task__name">{name}</div>
-        <div className="task__edit">&hellip;</div>
-        <div className="task__remove" onClick={() => remove(id)}>
+        <div className="task__edit">
+          <Link to={`/list/${id}`}>&hellip;</Link>
+        </div>
+        <div
+          className="task__remove"
+          onClick={() => handleRemove(id)}
+        >
           +
         </div>
       </div>

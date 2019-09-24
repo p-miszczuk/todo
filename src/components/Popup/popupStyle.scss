@@ -1,6 +1,7 @@
 $popupBackground: #333333;
 
 .popup {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -8,6 +9,10 @@ $popupBackground: #333333;
   width: 100vw;
   height: 100vh;
   z-index: 99;
+
+  &-show {
+    display: block;
+  }
 }
 .add-task {
   position: absolute;
