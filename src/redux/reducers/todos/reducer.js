@@ -1,4 +1,4 @@
-import { REMOVE_TASK, ADD_TASK } from '../../data/data'
+import { REMOVE_TASK, ADD_TASK, EDIT_TASK } from '../../data/data'
 
 const initialState = {
   tasks: [
@@ -43,6 +43,13 @@ const todos = (state = initialState, action) => {
       return {
         ...state,
         tasks: state.tasks.concat(action.payload),
+      }
+    case EDIT_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.id ? action.payload : task,
+        ),
       }
     default:
       return state

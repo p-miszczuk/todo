@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { editTask } from '../redux/reducers/todos/action'
 import Form from './Form'
 
 const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
 
 const mapDispatchToProps = dispatch => ({
-  //   edit: task => dispatch(editTask(task)),
+  edit: task => dispatch(editTask(task.id, task)),
 })
 
 class EditTask extends PureComponent {
@@ -25,6 +26,17 @@ class EditTask extends PureComponent {
 
   handleSubmit = event => {
     event.preventDefault()
+    const { id, name, description, comment, priority } = this.state
+    const { edit } = this.props
+    const task = {
+      id,
+      name,
+      description,
+      done: false,
+      comment,
+      priority,
+    }
+    edit(task)
   }
 
   handleClearForm = () => {
