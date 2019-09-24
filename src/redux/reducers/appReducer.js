@@ -39,7 +39,11 @@ const todos = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.filter(task => task.id !== action.payload),
       }
-
+    case ADD_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.concat(action.payload),
+      }
     default:
       return state
   }

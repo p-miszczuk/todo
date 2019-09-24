@@ -6,3 +6,8 @@ export const removeTask = payload => {
     payload,
   }
 }
+
+export const addTask = payload => ({
+  type: ADD_TASK,
+  payload,
+})
