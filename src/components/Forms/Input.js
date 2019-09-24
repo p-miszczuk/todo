@@ -7,18 +7,30 @@ const Input = ({
   onChange,
   value,
   className,
+  checked,
   required = false,
 }) => (
   <label>
-    {type === 'text' && label}
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      className={className}
-      required={required}
-    />
+    {(type === 'text' || type === 'textarea') && label}
+    {type === 'textarea' ? (
+      <textarea
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={className}
+        required={required}
+      />
+    ) : (
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={className}
+        checked={checked}
+        required={required}
+      />
+    )}
     {type === 'radio' && label}
   </label>
 )

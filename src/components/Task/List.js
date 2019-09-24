@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Task from './Task/Task'
-import AppPoup from './Popup'
-import MainButton from './Buttons/MainButton'
+import Task from '../Task'
+import AppPoup from '../Popup'
+import MainButton from '../Buttons/MainButton'
 import {
   removeTask,
   addTask,
-  changeTaskStatus,
-} from '../redux/reducers/todos/action'
+} from '../../redux/reducers/todos/action'
 
 const mapStateToProps = ({ todos }) => {
   return { tasks: todos.tasks }
@@ -16,7 +15,6 @@ const mapStateToProps = ({ todos }) => {
 const mapDispatchToProps = dispatch => ({
   remove: id => dispatch(removeTask(id)),
   add: task => dispatch(addTask(task)),
-  change: id => dispatch(changeTaskStatus(id)),
 })
 
 class List extends React.Component {
@@ -27,11 +25,6 @@ class List extends React.Component {
   handleRemoveTask = id => {
     const { remove } = this.props
     remove(id)
-  }
-
-  handleChangeStatus = id => {
-    const { change } = this.props
-    change(id)
   }
 
   handleShowPopup = () => {
@@ -73,7 +66,6 @@ class List extends React.Component {
               key={task.id}
               task={task}
               handleRemove={this.handleRemoveTask}
-              handleChangeStatus={this.handleChangeStatus}
             />
           ))}
           <AppPoup
