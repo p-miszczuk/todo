@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './taskStyle.scss'
 
-const Task = ({ handleRemove, task, handleEdit }) => {
+const Task = ({ handleRemove, task, handleEdit, setOneTask }) => {
   const {
     id,
     name,
@@ -18,7 +18,9 @@ const Task = ({ handleRemove, task, handleEdit }) => {
         <input type="checkBox" name="isDone" />
         <div className="task__name">{name}</div>
         <div className="task__edit">
-          <Link to={`/list/${id}`}>&hellip;</Link>
+          <Link to={setOneTask ? `/list/${id}/edit` : `/list/${id}`}>
+            &hellip;
+          </Link>
         </div>
         <div
           className="task__remove"

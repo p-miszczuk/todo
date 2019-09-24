@@ -32,8 +32,6 @@ class AddTaskPopup extends PureComponent {
       priority,
     }
 
-    console.log(task)
-
     addTask(task)
 
     this.setState({
@@ -41,7 +39,6 @@ class AddTaskPopup extends PureComponent {
       description: '',
       comment: '',
       priority: '',
-      isEditTask: true,
     })
 
     closePopup()
@@ -53,7 +50,6 @@ class AddTaskPopup extends PureComponent {
       description: '',
       comment: '',
       priority: '',
-      isEditTask: true,
     })
   }
 
