@@ -1,3 +1,5 @@
+import { REMOVE_TASK, ADD_TASK, EDIT_TASK } from '../../static/data'
+
 const initialState = {
   tasks: [
     {
@@ -31,7 +33,20 @@ const initialState = {
 }
 
 const todos = (state = initialState, action) => {
-  return state
+  switch (action.type) {
+    case REMOVE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.payload),
+      }
+    case ADD_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.concat(action.payload),
+      }
+    default:
+      return state
+  }
 }
 
 export default todos
