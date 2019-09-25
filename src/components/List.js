@@ -7,7 +7,7 @@ import {
   removeTask,
   addTask,
   changeTaskStatus,
-} from '../redux/reducers/todos/action'
+} from '../redux/reducers/todos/actions'
 
 const mapStateToProps = ({ todos }) => {
   return { tasks: todos.tasks }

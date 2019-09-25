@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import {
   removeTask,
   changeTaskStatus,
-} from '../redux/reducers/todos/action'
+} from '../redux/reducers/todos/actions'
 import { connect } from 'react-redux'
 import Task from './Task/Task'
 
@@ -23,7 +23,7 @@ class TaskItem extends PureComponent {
   }
 
   handleChangeStatus = id => {
-    const { changeStatus, history } = this.props
+    const { changeStatus } = this.props
     changeStatus(id)
   }
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { editTask } from '../redux/reducers/todos/action'
+import { editTask } from '../redux/reducers/todos/actions'
 import Form from './Forms/Form'
 
 const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
