@@ -21,16 +21,15 @@ const Form = ({
       value={name}
       required={true}
     />
-    <label>
-      Description:
-      <textarea
-        name="description"
-        className="add-task__description"
-        onChange={handleChange}
-        value={description}
-        required={true}
-      />
-    </label>
+    <Input
+      label="Description"
+      name="description"
+      type="textarea"
+      className="add-task__description"
+      onChange={handleChange}
+      value={description}
+      required={true}
+    />
     <Input
       label="Comment"
       type="text"
