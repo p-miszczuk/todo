@@ -5,64 +5,62 @@ import Form from './Forms/Form'
 
 class EditTask extends PureComponent {
   state = {
-    id: 0,
-    name: '',
-    description: '',
-    timestamp: '',
-    comment: '',
-    priority: '',
+    task: {
+      name: '',
+      description: '',
+      comment: '',
+      priority: '',
+    },
   }
 
   handleChange = event => {
     const { name, value } = event.target
-    this.setState({
+    const task = {
+      ...this.state.task,
       [name]: value,
+    }
+
+    this.setState({
+      task,
     })
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    const {
-      id,
-      name,
-      description,
-      timestamp,
-      comment,
-      priority,
-    } = this.state
 
-    const { edit, history, tasks } = this.props
+    const { edit, history } = this.props
+    const { id, comment, comments } = this.state.task
 
-    const comments = tasks.find(task => task.id === id).comments
-
-    const comment_ =
-      comment === ''
-        ? [...comments]
-        : comments.length
-        ? [...comments, comment]
-        : [comment]
+    const comments_ = !comment
+      ? [...comments]
+      : comments.length > 0
+      ? [...comments, comment]
+      : [comment]
 
     const task = {
-      id,
-      name,
-      description,
-      timestamp,
-      done: false,
-      comments: comment_,
-      priority,
+      ...this.state.task,
+      comments: comments_,
     }
+
+    delete task.comment
 
     edit(id, task)
     history.push('/list/')
   }
 
   handleClearForm = () => {
-    this.setState({
+    const cleanForm = {
       name: '',
       description: '',
       comment: '',
       priority: '',
-    })
+    }
+
+    const task = {
+      ...this.state.task,
+      ...cleanForm,
+    }
+    this.setState({ task })
   }
 
   componentDidMount() {
@@ -71,19 +69,17 @@ class EditTask extends PureComponent {
       task => task.id === parseInt(match.params.id),
     )
 
-    const { id, name, description, timestamp, priority } = task
-
-    this.setState({
-      id,
-      name,
-      description,
-      timestamp,
-      priority,
-    })
+    task &&
+      this.setState({
+        task: {
+          ...this.state.task,
+          ...task,
+        },
+      })
   }
 
   render() {
-    const { name, description, comment, priority } = this.state
+    const { name, description, comment, priority } = this.state.task
 
     return (
       <div
