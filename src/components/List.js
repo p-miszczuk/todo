@@ -7,17 +7,7 @@ import {
   removeTask,
   addTask,
   changeTaskStatus,
-} from '../redux/reducers/todos/action'
-
-const mapStateToProps = ({ todos }) => {
-  return { tasks: todos.tasks }
-}
-
-const mapDispatchToProps = dispatch => ({
-  remove: id => dispatch(removeTask(id)),
-  add: task => dispatch(addTask(task)),
-  change: id => dispatch(changeTaskStatus(id)),
-})
+} from '../redux/reducers/todos/actions'
 
 class List extends React.Component {
   state = {
@@ -86,6 +76,14 @@ class List extends React.Component {
       </div>
     )
   }
+}
+
+const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
+
+const mapDispatchToProps = {
+  remove: removeTask,
+  add: addTask,
+  change: changeTaskStatus,
 }
 
 export default connect(
