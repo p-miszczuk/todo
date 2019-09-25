@@ -1,9 +1,21 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
-const MainButton = ({ onClick, type, style, text }) => (
-  <button onClick={onClick} type={type} style={style}>
+const MainButton = ({
+  onClick,
+  type,
+  style,
+  text,
+  button = 'primary',
+}) => (
+  <Button
+    onClick={onClick}
+    type={type}
+    style={style}
+    variant={button}
+  >
     {text}
-  </button>
+  </Button>
 )
 
 export default MainButton

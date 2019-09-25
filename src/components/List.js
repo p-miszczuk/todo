@@ -46,6 +46,7 @@ class List extends React.Component {
       >
         <h2>Tasks</h2>
         <MainButton
+          button="outline-success"
           style={{
             padding: '5px 15px',
           }}
@@ -58,14 +59,16 @@ class List extends React.Component {
             width: '500px',
           }}
         >
-          {tasks.map(task => (
-            <Task
-              key={task.id}
-              task={task}
-              handleRemove={this.handleRemoveTask}
-              handleChangeStatus={this.handleChangeStatus}
-            />
-          ))}
+          {tasks
+            .map(task => (
+              <Task
+                key={task.id}
+                task={task}
+                handleRemove={this.handleRemoveTask}
+                handleChangeStatus={this.handleChangeStatus}
+              />
+            ))
+            .reverse()}
           <AppPoup
             showPopup={showPopup}
             addTask={add}
