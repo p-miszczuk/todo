@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { removeTask } from '../redux/reducers/todos/action'
+import { removeTask } from '../redux/reducers/todos/actions'
 import { connect } from 'react-redux'
 import Task from './Task/Task'
 

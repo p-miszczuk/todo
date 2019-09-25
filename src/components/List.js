@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Task from './Task/Task'
 import AppPoup from './Popup'
 import MainButton from './Buttons/MainButton'
-import { removeTask, addTask } from '../redux/reducers/todos/action'
+import { removeTask, addTask } from '../redux/reducers/todos/actions'
 
 const mapStateToProps = ({ todos }) => {
   return { tasks: todos.tasks }
