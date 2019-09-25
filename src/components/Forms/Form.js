@@ -77,11 +77,13 @@ const Form = ({
     </div>
     <div className="add-task__buttons">
       <MainButton
+        button="outline-success"
         type="submit"
         style={{ padding: '10px 25px' }}
         text={editTask ? 'Edit' : 'Add'}
       />
       <MainButton
+        button="outline-info"
         type="button"
         onClick={handleClearForm}
         style={{ padding: '10px 25px' }}
