@@ -1,8 +1,4 @@
-import {
-  REMOVE_TASK,
-  ADD_TASK,
-  EDIT_TASK,
-} from '../../reducers/todos/actions'
+import { REMOVE_TASK, ADD_TASK } from '../../reducers/todos/actions'
 
 const initialState = {
   tasks: [
