@@ -58,14 +58,16 @@ class List extends React.Component {
             width: '500px',
           }}
         >
-          {tasks.map(task => (
-            <Task
-              key={task.id}
-              task={task}
-              handleRemove={this.handleRemoveTask}
-              handleChangeStatus={this.handleChangeStatus}
-            />
-          ))}
+          {tasks
+            .map(task => (
+              <Task
+                key={task.id}
+                task={task}
+                handleRemove={this.handleRemoveTask}
+                handleChangeStatus={this.handleChangeStatus}
+              />
+            ))
+            .reverse()}
           <AppPoup
             showPopup={showPopup}
             addTask={add}
