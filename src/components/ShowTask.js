@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react'
-import { removeTask } from '../redux/reducers/todos/actions'
+import {
+  removeTask,
+  changeTaskStatus,
+} from '../redux/reducers/todos/actions'
 import { connect } from 'react-redux'
 import Task from './Task/Task'
 
@@ -10,6 +13,11 @@ class ShowTask extends PureComponent {
       task => task.id === parseInt(match.params.id),
     )
     return task
+  }
+
+  handleChangeStatus = id => {
+    const { changeStatus } = this.props
+    changeStatus(id)
   }
 
   handleRemove = id => {
@@ -23,7 +31,12 @@ class ShowTask extends PureComponent {
 
     return (
       <div style={{ width: '600px', margin: '0 auto' }}>
-        <Task task={task} handleRemove={this.handleRemove} />
+        <Task
+          task={task}
+          setOneTask
+          handleRemove={this.handleRemove}
+          handleChangeStatus={this.handleChangeStatus}
+        />
       </div>
     )
   }
@@ -33,6 +46,7 @@ const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
 
 const mapDispatchToProps = {
   remove: removeTask,
+  changeStatus: changeTaskStatus,
 }
 
 export default connect(

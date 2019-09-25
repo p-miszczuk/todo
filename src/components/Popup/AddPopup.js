@@ -5,10 +5,12 @@ import './popupStyle.scss'
 
 class AddTaskPopup extends PureComponent {
   state = {
-    name: '',
-    description: '',
-    comment: '',
-    priority: '',
+    task: {
+      name: '',
+      description: '',
+      comment: '',
+      priority: '',
+    },
   }
 
   getDate = () => {
@@ -20,17 +22,14 @@ class AddTaskPopup extends PureComponent {
   handleSubmit = event => {
     event.preventDefault()
     const { addTask, lastTaskId, closePopup } = this.props
-    const { name, description, comment, priority } = this.state
+
     const timestamp = this.getDate()
 
     const task = {
+      ...this.state.task,
       id: lastTaskId + 1,
-      name,
-      description,
       timestamp,
       done: false,
-      comment,
-      priority,
     }
 
     addTask(task)
@@ -41,22 +40,23 @@ class AddTaskPopup extends PureComponent {
 
   handleClearForm = () => {
     this.setState({
-      name: '',
-      description: '',
-      comment: '',
-      priority: '',
+      task: { name: '', description: '', comment: '', priority: '' },
     })
   }
 
   handleChange = event => {
     const { name, value } = event.target
-    this.setState({
+    const task = {
+      ...this.state.task,
       [name]: value,
+    }
+    this.setState({
+      task,
     })
   }
 
   render() {
-    const { name, description, comment, priority } = this.state
+    const { name, description, comment, priority } = this.state.task
     const { showPopup, closePopup } = this.props
 
     const classnames = classNames({

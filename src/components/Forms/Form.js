@@ -10,6 +10,7 @@ const Form = ({
   handleSubmit,
   handleChange,
   handleClearForm,
+  editTask,
 }) => (
   <form onSubmit={handleSubmit}>
     <Input
@@ -78,7 +79,7 @@ const Form = ({
       <MainButton
         type="submit"
         style={{ padding: '10px 25px' }}
-        text="Add"
+        text={editTask ? 'Edit' : 'Add'}
       />
       <MainButton
         type="button"

@@ -1,4 +1,9 @@
-import { REMOVE_TASK, ADD_TASK } from '../../reducers/todos/actions'
+import {
+  REMOVE_TASK,
+  ADD_TASK,
+  EDIT_TASK,
+  CHANGE_STATUS,
+} from '../../reducers/todos/actions'
 
 const initialState = {
   tasks: [
@@ -43,6 +48,22 @@ const todos = (state = initialState, action) => {
       return {
         ...state,
         tasks: state.tasks.concat(action.payload),
+      }
+    case EDIT_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.id ? action.payload : task,
+        ),
+      }
+    case CHANGE_STATUS:
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.payload
+            ? { ...task, done: !task.done }
+            : task,
+        ),
       }
     default:
       return state
