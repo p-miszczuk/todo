@@ -5,18 +5,21 @@ import Form from './Forms/Form'
 
 class EditTask extends PureComponent {
   state = {
-    id: 0,
-    name: '',
-    description: '',
-    timestamp: '',
-    comment: '',
-    priority: '',
+    task: {
+      id: 0,
+      name: '',
+      description: '',
+      timestamp: '',
+      comment: '',
+      priority: '',
+    },
   }
 
   handleChange = event => {
     const { name, value } = event.target
+    const { task } = this.state
     this.setState({
-      [name]: value,
+      task: { ...task, [name]: value },
     })
   }
 
@@ -29,7 +32,7 @@ class EditTask extends PureComponent {
       timestamp,
       comment,
       priority,
-    } = this.state
+    } = this.state.task
 
     const { edit, history } = this.props
 
@@ -49,10 +52,7 @@ class EditTask extends PureComponent {
 
   handleClearForm = () => {
     this.setState({
-      name: '',
-      description: '',
-      comment: '',
-      priority: '',
+      task: { name: '', description: '', comment: '', priority: '' },
     })
   }
 
@@ -65,16 +65,12 @@ class EditTask extends PureComponent {
     const { id, name, description, timestamp, priority } = task
 
     this.setState({
-      id,
-      name,
-      description,
-      timestamp,
-      priority,
+      task: { id, name, description, timestamp, priority },
     })
   }
 
   render() {
-    const { name, description, comment, priority } = this.state
+    const { name, description, comment, priority } = this.state.task
 
     return (
       <div
