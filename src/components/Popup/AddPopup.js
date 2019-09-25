@@ -13,7 +13,8 @@ class AddTaskPopup extends PureComponent {
 
   getDate = () => {
     const today = new Date()
-    return `${today.getDay()}.${today.getMonth()}.${today.getFullYear()}`
+    return `${today.getDate()}.${today.getMonth() +
+      1}.${today.getFullYear()}`
   }
 
   handleSubmit = event => {
