@@ -47,9 +47,9 @@ const Task = ({
       <div className="task__descrition">{description}</div>
       <div className="task__comments">
         <p>
-          <Link
-            to={`/list/${id}`}
-          >{`comments [ ${comments.length} ]`}</Link>
+          <Link to={`/list/${id}`}>
+            {`comments [ ${comments.length} ]`}
+          </Link>
         </p>
         <div className="task__comments-list">
           <ul>

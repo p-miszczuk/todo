@@ -22,13 +22,15 @@ class AddTaskPopup extends PureComponent {
     const { name, description, comment, priority } = this.state
     const timestamp = this.getDate()
 
+    const com = comment === '' ? [] : [comment]
+
     const task = {
       id: lastTaskId + 1,
       name,
       description,
       timestamp,
       done: false,
-      comment,
+      comments: com,
       priority,
     }
 

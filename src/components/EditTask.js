@@ -36,7 +36,16 @@ class EditTask extends PureComponent {
       priority,
     } = this.state
 
-    const { edit, history } = this.props
+    const { edit, history, tasks } = this.props
+
+    const comments = tasks.find(task => task.id === id).comments
+
+    const comment_ =
+      comment === ''
+        ? [...comments]
+        : comments.length
+        ? [...comments, comment]
+        : [comment]
 
     const task = {
       id,
@@ -44,7 +53,7 @@ class EditTask extends PureComponent {
       description,
       timestamp,
       done: false,
-      comment,
+      comments: comment_,
       priority,
     }
     edit(task)
