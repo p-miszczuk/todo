@@ -3,12 +3,6 @@ import { connect } from 'react-redux'
 import { editTask } from '../redux/reducers/todos/actions'
 import Form from './Forms/Form'
 
-const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
-
-const mapDispatchToProps = dispatch => ({
-  edit: task => dispatch(editTask(task.id, task)),
-})
-
 class EditTask extends PureComponent {
   state = {
     id: 0,
@@ -20,8 +14,9 @@ class EditTask extends PureComponent {
   }
 
   handleChange = event => {
+    const { name, value } = event.target
     this.setState({
-      [event.target.name]: event.target.value,
+      [name]: value,
     })
   }
 
@@ -56,7 +51,8 @@ class EditTask extends PureComponent {
       comments: comment_,
       priority,
     }
-    edit(task)
+
+    edit(id, task)
     history.push('/list/')
   }
 
@@ -75,29 +71,20 @@ class EditTask extends PureComponent {
       task => task.id === parseInt(match.params.id),
     )
 
-    const {
-      id,
-      name,
-      description,
-      timestamp,
-      comment,
-      priority,
-    } = task
-
-    const checkedComment = comment === undefined ? '' : comment
+    const { id, name, description, timestamp, priority } = task
 
     this.setState({
       id,
       name,
       description,
       timestamp,
-      comment: checkedComment,
       priority,
     })
   }
 
   render() {
     const { name, description, comment, priority } = this.state
+
     return (
       <div
         style={{
@@ -129,6 +116,12 @@ class EditTask extends PureComponent {
       </div>
     )
   }
+}
+
+const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
+
+const mapDispatchToProps = {
+  edit: editTask,
 }
 
 export default connect(

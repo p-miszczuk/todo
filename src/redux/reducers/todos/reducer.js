@@ -3,7 +3,7 @@ import {
   ADD_TASK,
   EDIT_TASK,
   CHANGE_STATUS,
-} from '../../static/data'
+} from '../../reducers/todos/actions'
 
 const initialState = {
   tasks: [

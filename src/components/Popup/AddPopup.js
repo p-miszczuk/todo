@@ -13,7 +13,8 @@ class AddTaskPopup extends PureComponent {
 
   getDate = () => {
     const today = new Date()
-    return `${today.getDay()}.${today.getMonth()}.${today.getFullYear()}`
+    return `${today.getDate()}.${today.getMonth() +
+      1}.${today.getFullYear()}`
   }
 
   handleSubmit = event => {
@@ -35,13 +36,7 @@ class AddTaskPopup extends PureComponent {
     }
 
     addTask(task)
-
-    this.setState({
-      name: '',
-      description: '',
-      comment: '',
-      priority: '',
-    })
+    this.handleClearForm()
 
     closePopup()
   }
@@ -56,8 +51,9 @@ class AddTaskPopup extends PureComponent {
   }
 
   handleChange = event => {
+    const { name, value } = event.target
     this.setState({
-      [event.target.name]: event.target.value,
+      [name]: value,
     })
   }
 
