@@ -3,7 +3,7 @@ import {
   ADD_TASK,
   EDIT_TASK,
   CHANGE_STATUS,
-} from '../../static/data'
+} from '../../reducers/todos/actions'
 
 const initialState = {
   tasks: [
@@ -38,6 +38,7 @@ const initialState = {
 }
 
 const todos = (state = initialState, action) => {
+  console.log(action.payload)
   switch (action.type) {
     case REMOVE_TASK:
       return {
