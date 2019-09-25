@@ -5,15 +5,6 @@ import AppPoup from './Popup'
 import MainButton from './Buttons/MainButton'
 import { removeTask, addTask } from '../redux/reducers/todos/actions'
 
-const mapStateToProps = ({ todos }) => {
-  return { tasks: todos.tasks }
-}
-
-const mapDispatchToProps = dispatch => ({
-  remove: id => dispatch(removeTask(id)),
-  add: task => dispatch(addTask(task)),
-})
-
 class List extends React.Component {
   state = {
     showPopup: false,
@@ -75,6 +66,15 @@ class List extends React.Component {
       </div>
     )
   }
+}
+
+const mapStateToProps = ({ todos }) => {
+  return { tasks: todos.tasks }
+}
+
+const mapDispatchToProps = {
+  remove: removeTask,
+  add: addTask,
 }
 
 export default connect(

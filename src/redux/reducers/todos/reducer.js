@@ -1,4 +1,8 @@
-import { REMOVE_TASK, ADD_TASK, EDIT_TASK } from '../../static/data'
+import {
+  REMOVE_TASK,
+  ADD_TASK,
+  EDIT_TASK,
+} from '../../reducers/todos/actions'
 
 const initialState = {
   tasks: [

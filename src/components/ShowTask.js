@@ -3,13 +3,7 @@ import { removeTask } from '../redux/reducers/todos/actions'
 import { connect } from 'react-redux'
 import Task from './Task/Task'
 
-const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
-
-const mapDispatchToProps = dispatch => ({
-  remove: id => dispatch(removeTask(id)),
-})
-
-class TaskItem extends PureComponent {
+class ShowTask extends PureComponent {
   getTask = () => {
     const { tasks, match } = this.props
     const task = tasks.find(
@@ -35,7 +29,13 @@ class TaskItem extends PureComponent {
   }
 }
 
+const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
+
+const mapDispatchToProps = {
+  remove: removeTask,
+}
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(TaskItem)
+)(ShowTask)
