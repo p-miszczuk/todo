@@ -17,34 +17,26 @@ class EditTask extends PureComponent {
 
   handleChange = event => {
     const { name, value } = event.target
-    const { task } = this.state
+    const task = {
+      ...this.state.task,
+      [name]: value,
+    }
     this.setState({
-      task: { ...task, [name]: value },
+      task,
     })
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    const {
-      id,
-      name,
-      description,
-      timestamp,
-      comment,
-      priority,
-    } = this.state.task
 
     const { edit, history } = this.props
 
     const task = {
-      id,
-      name,
-      description,
-      timestamp,
+      ...this.state.task,
       done: false,
-      comment,
-      priority,
     }
+
+    const { id } = this.state.task
 
     edit(id, task)
     history.push('/list/')

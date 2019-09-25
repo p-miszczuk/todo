@@ -22,17 +22,14 @@ class AddTaskPopup extends PureComponent {
   handleSubmit = event => {
     event.preventDefault()
     const { addTask, lastTaskId, closePopup } = this.props
-    const { name, description, comment, priority } = this.state.task
+
     const timestamp = this.getDate()
 
     const task = {
+      ...this.state.task,
       id: lastTaskId + 1,
-      name,
-      description,
       timestamp,
       done: false,
-      comment,
-      priority,
     }
 
     addTask(task)
@@ -49,9 +46,12 @@ class AddTaskPopup extends PureComponent {
 
   handleChange = event => {
     const { name, value } = event.target
-    const { task } = this.state
+    const task = {
+      ...this.state.task,
+      [name]: value,
+    }
     this.setState({
-      task: { ...task, [name]: value },
+      task,
     })
   }
 
