@@ -24,18 +24,18 @@ class AddTaskPopup extends PureComponent {
     const { addTask, lastTaskId, closePopup } = this.props
 
     const timestamp = this.getDate()
-    const { name, comment, description, priority } = this.state.task
-    const com = comment === '' ? [] : [comment]
+    const { comment } = this.state.task
+    const comments = comment === '' ? [] : [comment]
 
     const task = {
+      ...this.state.task,
       id: lastTaskId + 1,
-      name,
-      description,
       timestamp,
       done: false,
-      comments: com,
-      priority,
+      comments,
     }
+
+    delete task.comment
 
     addTask(task)
     this.handleClearForm()
@@ -44,9 +44,18 @@ class AddTaskPopup extends PureComponent {
   }
 
   handleClearForm = () => {
-    this.setState({
-      task: { name: '', description: '', comment: '', priority: '' },
-    })
+    const cleanForm = {
+      name: '',
+      description: '',
+      comment: '',
+      priority: '',
+    }
+
+    const task = {
+      ...this.state.task,
+      ...cleanForm,
+    }
+    this.setState({ task })
   }
 
   handleChange = event => {
@@ -55,6 +64,7 @@ class AddTaskPopup extends PureComponent {
       ...this.state.task,
       [name]: value,
     }
+
     this.setState({
       task,
     })
