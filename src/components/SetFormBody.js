@@ -100,10 +100,15 @@ class SetFormBody extends PureComponent {
   }
 
   handleClearForm = () => {
-    const task = {
-      ...this.state.task,
-      ...cleanForm,
-    }
+    const { showPopup } = this.props
+
+    let task
+    showPopup
+      ? (task = { ...cleanForm })
+      : (task = {
+          ...this.state.task,
+          ...cleanForm,
+        })
     this.setState({ task })
   }
 
