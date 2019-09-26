@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Task from './Task/Task'
-import AppPoup from './Popup'
+import SetFormBody from './SetFormBody'
 import MainButton from './Buttons/MainButton'
 import {
   removeTask,
-  addTask,
   changeTaskStatus,
 } from '../redux/reducers/todos/actions'
 
@@ -19,22 +18,20 @@ class List extends React.Component {
     remove(id)
   }
 
-  handleChangeStatus = id => {
-    const { change } = this.props
-    change(id)
-  }
-
   handleShowPopup = () => {
-    this.setState({ showPopup: !this.state.showPopup })
+    this.setState({
+      showPopup: !this.state.showPopup,
+    })
   }
 
-  getLastTaskId = tasks =>
-    tasks.length > 0 && tasks[tasks.length - 1].id
+  handleChangeStatus = id => {
+    const { changeStatus } = this.props
+    changeStatus(id)
+  }
 
   render() {
-    const { tasks, add } = this.props
+    const { tasks } = this.props
     const { showPopup } = this.state
-    const lastTaskId = this.getLastTaskId(tasks)
 
     return (
       <div
@@ -68,10 +65,9 @@ class List extends React.Component {
               />
             ))
             .reverse()}
-          <AppPoup
+          <SetFormBody
+            closeEditForm
             showPopup={showPopup}
-            addTask={add}
-            lastTaskId={lastTaskId}
             closePopup={this.handleShowPopup}
           />
         </div>
@@ -84,8 +80,7 @@ const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
 
 const mapDispatchToProps = {
   remove: removeTask,
-  add: addTask,
-  change: changeTaskStatus,
+  changeStatus: changeTaskStatus,
 }
 
 export default connect(
