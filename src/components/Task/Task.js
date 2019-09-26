@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Card, Badge } from 'react-bootstrap'
+import classNames from 'classnames'
 import Comment from './Comment'
 import './taskStyle.scss'
+
+const medium = 'medium'
+const high = 'high'
 
 const Task = ({
   handleRemove,
@@ -18,16 +23,23 @@ const Task = ({
     comments,
     priority,
   } = task
+
+  const classValues = classNames({
+    task__name: true,
+    'task__name--medium': priority === medium,
+    'task__name--high': priority === high,
+  })
+
   return (
-    <div className="task">
-      <div className="task__header">
+    <Card className="task" bg="dark" text="white">
+      <Card.Header className="task__header">
         <input
           type="checkBox"
           name="isDone"
           checked={done}
           onChange={() => handleChangeStatus(id)}
         />
-        <div className="task__name">{name}</div>
+        <div className={classValues}>{name}</div>
         <div className="task__edit">
           <Link
             to={
@@ -43,30 +55,40 @@ const Task = ({
         >
           &times;
         </div>
-      </div>
-      <div className="task__descrition">{description}</div>
-      <div className="task__comments">
-        <p>
-          <Link to={`/list/${id}`}>
-            {`comments [ ${comments.length} ]`}
-          </Link>
-        </p>
-        <div className="task__comments-list">
-          <ul>
-            {setOneTask &&
-              comments.map((comment, index) => (
-                <Comment key={index} comment={comment} />
-              ))}
-          </ul>
-        </div>
-      </div>
-      <div className="task__footer">
+      </Card.Header>
+      <Card.Body>
+        <Card.Text className="task__descrition">
+          {description}
+        </Card.Text>
+        <Card.Text className="task__comments">
+          <p>
+            <Link to={`/list/${id}`}>
+              <Badge variant="success" style={{ padding: '5px' }}>
+                comments {comments.length}
+              </Badge>
+            </Link>
+          </p>
+          <div className="task__comments-list">
+            <ul>
+              {setOneTask &&
+                comments.map((comment, index) => (
+                  <Comment key={index} comment={comment} />
+                ))}
+            </ul>
+          </div>
+        </Card.Text>
+      </Card.Body>
+      <Card.Footer className="task__footer">
         <div className="task__date">{timestamp}</div>
         <div className="task__status">
-          {done ? <span>Done</span> : <span>To do</span>}
+          {done ? (
+            <span className="task__done">Done</span>
+          ) : (
+            <span>To do</span>
+          )}
         </div>
-      </div>
-    </div>
+      </Card.Footer>
+    </Card>
   )
 }
 export default Task

@@ -1,10 +1,11 @@
 $taskBorder: 1px solid #cccccc;
 
 .task {
-  border: $taskBorder;
+  // border: $taskBorder;
+  // border-radius: 4px;
   width: 100%;
-  margin: 10px 0;
-  padding: 5px;
+  margin: 15px 0;
+  // padding: 5px;
 
   &__header {
     display: flex;
@@ -15,52 +16,59 @@ $taskBorder: 1px solid #cccccc;
     flex: 1;
     font-size: 20px;
   }
+  &__name--medium {
+    color: #ffff00;
+  }
+  &__name--high {
+    color: #ff0000;
+  }
   &__edit {
     align-self: flex-end;
-    margin-bottom: 9px;
+    margin-bottom: 10px;
     font-size: 18px;
     cursor: pointer;
   }
   &__remove {
     align-self: flex-end;
     font-size: 30px;
-    margin: 0 10px 0 15px;
+    // margin: 0 10px 0 15px;
+    margin-left: 15px;
     cursor: pointer;
   }
   &__descrition {
     padding: 10px;
-    border-top: $taskBorder;
+    // border-top: $taskBorder;
     border-bottom: $taskBorder;
     min-height: 150px;
   }
   &__comments {
-    padding: 10px 0;
-    border-bottom: $taskBorder;
+    // padding: 10px 0;
+    // border-bottom: $taskBorder;
 
     > p {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
-      margin-right: 10px;
+      // margin-right: 10px;
 
       > a {
-        font-size: 13px;
+        font-size: 15px;
         text-decoration: none;
         color: #000000;
 
         &:hover {
-          color: #0323aa;
+          // color: #0323aa;
         }
       }
     }
 
     &-list {
-      padding: 10px;
-
       > ul {
         list-style: none;
+        margin: 0;
 
         > li {
-          font-size: 13px;
+          font-size: 15px;
           line-height: 20px;
         }
       }
@@ -70,5 +78,10 @@ $taskBorder: 1px solid #cccccc;
     display: flex;
     justify-content: space-between;
     padding: 10px 15px;
+
+    .task__done {
+      color: #ff0000;
+      font-weight: 500;
+    }
   }
 }

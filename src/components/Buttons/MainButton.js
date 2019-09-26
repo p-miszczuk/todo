@@ -4,16 +4,11 @@ import { Button } from 'react-bootstrap'
 const MainButton = ({
   onClick,
   type,
-  style,
   text,
   button = 'primary',
+  size = 'sm',
 }) => (
-  <Button
-    onClick={onClick}
-    type={type}
-    style={style}
-    variant={button}
-  >
+  <Button onClick={onClick} type={type} variant={button} size={size}>
     {text}
   </Button>
 )

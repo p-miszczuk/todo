@@ -72,7 +72,7 @@ class AddTaskPopup extends PureComponent {
           <div className="add-task__close" onClick={closePopup}>
             &times;
           </div>
-          <h2>Create new task</h2>
+          <h3>Create new task</h3>
           <Form
             name={name}
             description={description}

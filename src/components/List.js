@@ -39,36 +39,45 @@ class List extends React.Component {
     return (
       <div
         style={{
+          position: 'relative',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          width: '600px',
+          margin: '0 auto',
         }}
       >
         <h2>Tasks</h2>
-        <MainButton
-          button="outline-success"
-          style={{
-            padding: '5px 15px',
-          }}
-          onClick={this.handleShowPopup}
-          text="Add task"
-        />
+        <div style={{ position: 'absolute', left: '0', top: '0' }}>
+          <MainButton
+            button="outline-success"
+            size="lg"
+            onClick={this.handleShowPopup}
+            text="Add task"
+          />
+        </div>
         <div
           className="tasks"
           style={{
-            width: '500px',
+            width: '100%',
           }}
         >
-          {tasks
-            .map(task => (
-              <Task
-                key={task.id}
-                task={task}
-                handleRemove={this.handleRemoveTask}
-                handleChangeStatus={this.handleChangeStatus}
-              />
-            ))
-            .reverse()}
+          {tasks.length <= 0 ? (
+            <h5 style={{ textAlign: 'center', marginTop: '15px' }}>
+              You don't have any tasks
+            </h5>
+          ) : (
+            tasks
+              .map(task => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  handleRemove={this.handleRemoveTask}
+                  handleChangeStatus={this.handleChangeStatus}
+                />
+              ))
+              .reverse()
+          )}
           <AppPoup
             showPopup={showPopup}
             addTask={add}
