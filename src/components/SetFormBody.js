@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import EditTask from './EditTask'
 import AddPopup from './Popup/AddPopup'
 import { editTask, addTask } from '../redux/reducers/todos/actions'
+import { tsAnyKeyword } from '@babel/types'
 
 const cleanForm = {
   name: '',
@@ -31,7 +32,9 @@ class SetFormBody extends PureComponent {
       task = tasks.find(task => task.id === parseInt(match.params.id))
 
       if (task && !state.task.timestamp)
-        return { ...state.task, task }
+        return {
+          task,
+        }
     }
 
     return null
@@ -46,6 +49,14 @@ class SetFormBody extends PureComponent {
   getLastTaskId = tasks =>
     tasks.length > 0 && tasks[tasks.length - 1].id
 
+  setTaskValues = (comment, task, tasks) => {
+    task.id = this.getLastTaskId(tasks) + 1
+    task.timestamp = this.getDate()
+    task.done = false
+    task.comments = !comment ? [] : [comment]
+    return task
+  }
+
   handleSubmit = event => {
     event.preventDefault()
 
@@ -58,45 +69,26 @@ class SetFormBody extends PureComponent {
       tasks,
     } = this.props
 
-    if (showPopup) {
-      const lastTaskId = this.getLastTaskId(tasks)
-      const timestamp = this.getDate()
-      const { comment } = this.state.task
-      const comments = comment === '' ? [] : [comment]
-
-      const task = {
-        ...this.state.task,
-        id: lastTaskId + 1,
-        timestamp,
-        done: false,
-        comments,
-      }
-
-      delete task.comment
-
-      addTask(task)
-      this.handleClearForm()
-
-      closePopup()
-
-      return
-    }
-
-    const { id, comment, comments } = this.state.task
-
-    const comments_ = !comment
-      ? [...comments]
-      : [...comments, comment]
+    const { comment, comments } = this.state.task
 
     const task = {
       ...this.state.task,
-      comments: comments_,
     }
 
     delete task.comment
 
-    editTask(id, task)
-    history.push('/list/')
+    if (showPopup) {
+      const task_ = this.setTaskValues(comment, task, tasks)
+
+      addTask(task_)
+      this.handleClearForm()
+      closePopup()
+    } else {
+      if (!!comment) comments.push(comment)
+
+      editTask(task.id, task)
+      history.push('/list/')
+    }
   }
 
   handleClearForm = () => {
