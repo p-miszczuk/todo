@@ -65,7 +65,10 @@ class List extends React.Component {
               />
             ))
             .reverse()
-            .sort((x, y) => x.props.task.done - y.props.task.done)}
+            .sort(
+              (taskA, taskB) =>
+                taskA.props.task.done - taskB.props.task.done,
+            )}
           <SetFormBody
             closeEditForm
             showPopup={showPopup}
