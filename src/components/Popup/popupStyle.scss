@@ -12,6 +12,12 @@
     display: block;
   }
 }
+
+form label {
+  width: 100%;
+  font-size: 14px;
+}
+
 .add-task {
   position: absolute;
   top: 50%;
@@ -34,11 +40,6 @@
     right: 15px;
     font-size: 30px;
     cursor: pointer;
-  }
-
-  label {
-    font-size: 14px;
-    width: 100%;
   }
 
   &__text {

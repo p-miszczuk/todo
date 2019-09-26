@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { editTask } from '../redux/reducers/todos/actions'
-import Form from './Forms/Form'
+import { editTask } from '../../redux/reducers/todos/actions'
+import Form from '../Forms/Form'
 
 class EditTask extends PureComponent {
   state = {
@@ -97,12 +97,13 @@ class EditTask extends PureComponent {
         <div
           style={{
             marginTop: '10px',
-            width: '400px',
+            width: '500px',
             border: '1px solid #ccc',
             padding: '10px',
           }}
         >
           <Form
+            labelStyle={{ width: '100%' }}
             editTask
             name={name}
             description={description}

@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 import Index from '../components/Index'
 import List from '../components/List'
 import ShowTask from '../components/ShowTask'
-import EditTask from '../components/EditTask'
+import EditTask from '../components/Edit/EditTask'
 
 const Main = () => (
   <main style={{ marginTop: '25px' }}>
