@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { Card } from 'react-bootstrap'
 import { editTask } from '../../redux/reducers/todos/actions'
 import Form from '../Forms/Form'
 
@@ -93,27 +94,28 @@ class EditTask extends PureComponent {
           alignItems: 'center',
         }}
       >
-        <h2>Edit task</h2>
-        <div
-          style={{
-            marginTop: '10px',
-            width: '500px',
-            border: '1px solid #ccc',
-            padding: '10px',
-          }}
-        >
-          <Form
-            labelStyle={{ width: '100%' }}
-            editTask
-            name={name}
-            description={description}
-            comment={comment}
-            priority={priority}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            handleClearForm={this.handleClearForm}
-          />
-        </div>
+        <Card bg="dark" text="light">
+          <h2 style={{ margin: '0 auto' }}>Edit task</h2>
+          <div
+            style={{
+              marginTop: '10px',
+              width: '500px',
+              padding: '10px',
+            }}
+          >
+            <Form
+              labelStyle={{ width: '100%' }}
+              editTask
+              name={name}
+              description={description}
+              comment={comment}
+              priority={priority}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              handleClearForm={this.handleClearForm}
+            />
+          </div>
+        </Card>
       </div>
     )
   }

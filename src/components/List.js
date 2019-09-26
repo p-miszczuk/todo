@@ -50,7 +50,7 @@ class List extends React.Component {
         <h2>Tasks</h2>
         <div style={{ position: 'absolute', left: '0', top: '0' }}>
           <MainButton
-            button="outline-success"
+            button="success"
             size="lg"
             onClick={this.handleShowPopup}
             text="Add task"
