@@ -64,7 +64,8 @@ class List extends React.Component {
                 handleChangeStatus={this.handleChangeStatus}
               />
             ))
-            .reverse()}
+            .reverse()
+            .sort((x, y) => x.props.task.done - y.props.task.done)}
           <SetFormBody
             closeEditForm
             showPopup={showPopup}

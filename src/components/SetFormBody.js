@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import EditTask from './EditTask'
 import AddPopup from './Popup/AddPopup'
 import { editTask, addTask } from '../redux/reducers/todos/actions'
-// import './popupStyle.scss'
 
 const cleanForm = {
   name: '',
