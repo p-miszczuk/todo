@@ -13,7 +13,7 @@ const initialState = {
       timestamp: '01.10.2019',
       done: false,
       description: 'Clean the car asap',
-      comments: 'asap',
+      comments: [],
       priority: 'high',
     },
     {
@@ -22,7 +22,7 @@ const initialState = {
       timestamp: '02.10.2019',
       done: false,
       description: 'Buy Addidas or Nike',
-      comments: 'sports type',
+      comments: [],
       priority: 'low',
     },
     {
@@ -31,7 +31,7 @@ const initialState = {
       timestamp: '03.10.2019',
       done: false,
       description: 'Meeting with Anna and John',
-      comments: 'Dance Club',
+      comments: ['Dance Club', 'Big Ice'],
       priority: 'medium',
     },
   ],
