@@ -9,6 +9,7 @@ const medium = 'medium'
 const high = 'high'
 
 const Task = ({
+  showDoneTasks,
   handleRemove,
   task,
   setOneTask,
@@ -30,6 +31,11 @@ const Task = ({
     'task__name--high': priority === high,
   })
 
+  const classEdit = classNames({
+    task__edit: true,
+    'task__edit--display': showDoneTasks,
+  })
+
   return (
     <Card className="task" bg="dark" text="white">
       <Card.Header className="task__header">
@@ -40,7 +46,7 @@ const Task = ({
           onChange={() => handleChangeStatus(id)}
         />
         <div className={classValues}>{name}</div>
-        <div className="task__edit">
+        <div className={classEdit}>
           <Link
             to={
               setOneTask && !done ? `/list/${id}/edit` : `/list/${id}`
@@ -51,7 +57,7 @@ const Task = ({
         </div>
         <div
           className="task__remove"
-          onClick={() => handleRemove(id)}
+          onClick={() => done && handleRemove(id)}
         >
           &times;
         </div>
@@ -70,7 +76,7 @@ const Task = ({
           </p>
           <div className="task__comments-list">
             <ul>
-              {setOneTask &&
+              {(setOneTask || showDoneTasks) &&
                 comments.map((comment, index) => (
                   <Comment key={index} comment={comment} />
                 ))}

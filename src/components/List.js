@@ -7,7 +7,6 @@ import {
   removeTask,
   changeTaskStatus,
 } from '../redux/reducers/todos/actions'
-import { SNAPSHOT_VERSION_WARNING } from 'jest-snapshot/build/utils'
 
 const LOW = 'low'
 const HIGH = 'high'
@@ -28,18 +27,20 @@ class List extends React.Component {
     return null
   }
 
-  sortTask = (taskA, taskB) => {
-    if (taskA.props.task.done > taskB.props.task.done) return 1
-    if (taskA.props.task.done < taskB.props.task.done) return -1
-    if (taskA.props.task.priority === HIGH) return -1
-    if (taskA.props.task.priority === LOW) return 1
-
-    return 0
+  sortTasks = (taskA, taskB) => {
+    return (
+      (taskA.props.task.done > taskB.props.task.done && 1) ||
+      (taskA.props.task.done < taskB.props.task.done && -1) ||
+      (taskA.props.task.priority === HIGH && -1) ||
+      (taskA.props.task.priority === LOW && 1) ||
+      0
+    )
   }
 
   handleRemoveTask = id => {
     const { remove } = this.props
-    remove(id)
+    const { showDoneTasks } = this.state
+    !showDoneTasks && remove(id)
   }
 
   handleShowPopup = () => {
@@ -50,13 +51,15 @@ class List extends React.Component {
 
   handleChangeStatus = id => {
     const { changeStatus } = this.props
-    changeStatus(id)
+    const { showDoneTasks } = this.state
+
+    !showDoneTasks && changeStatus(id)
   }
 
   render() {
     const { tasks, doneTasks } = this.props
     const { showPopup, showDoneTasks } = this.state
-    console.log(this.props)
+
     return (
       <div
         style={{
@@ -68,21 +71,28 @@ class List extends React.Component {
           margin: '0 auto',
         }}
       >
-        {tasks.length <= 0 ? (
+        {(!showDoneTasks && tasks.length <= 0) ||
+        (showDoneTasks && doneTasks.length <= 0) ? (
           <h6 style={{ marginTop: '25px', textAlign: 'center' }}>
-            You don't have any tasks yet
+            {!showDoneTasks
+              ? `You don't have any tasks yet`
+              : `It's clean :)`}
           </h6>
         ) : (
-          <h2>Your tasks</h2>
+          <h2>
+            {!showDoneTasks ? `Your tasks` : `Your finished tasks`}
+          </h2>
         )}
-        <div style={{ position: 'absolute', left: '0', top: '0' }}>
-          <MainButton
-            button="success"
-            size="lg"
-            onClick={this.handleShowPopup}
-            text="Add task"
-          />
-        </div>
+        {!showDoneTasks && (
+          <div style={{ position: 'absolute', left: '0', top: '0' }}>
+            <MainButton
+              button="success"
+              size="lg"
+              onClick={this.handleShowPopup}
+              text="Add task"
+            />
+          </div>
+        )}
         <div
           className="tasks"
           style={{
@@ -100,19 +110,19 @@ class List extends React.Component {
                 />
               ))
               .reverse()
-              .sort((taskA, taskB) => this.sortTask(taskA, taskB))}
+              .sort((taskA, taskB) => this.sortTasks(taskA, taskB))}
           {!!showDoneTasks &&
             doneTasks
               .map(task => (
                 <Task
+                  showDoneTasks={showDoneTasks}
                   key={task.id}
                   task={task}
                   handleRemove={this.handleRemoveTask}
                   handleChangeStatus={this.handleChangeStatus}
                 />
               ))
-              .reverse()
-              .sort((taskA, taskB) => this.sortTask(taskA, taskB))}
+              .reverse()}
           <SetFormBody
             closeEditForm
             showPopup={showPopup}
