@@ -1,17 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Task from './Task/Task'
-import AppPoup from './Popup'
+import SetFormBody from './SetFormBody'
 import MainButton from './Buttons/MainButton'
 import {
   removeTask,
-  addTask,
   changeTaskStatus,
 } from '../redux/reducers/todos/actions'
+
+const LOW = 'low'
+const HIGH = 'high'
 
 class List extends React.Component {
   state = {
     showPopup: false,
+  }
+
+  sortTask = (taskA, taskB) => {
+    if (taskA.props.task.done > taskB.props.task.done) return 1
+    if (taskA.props.task.done < taskB.props.task.done) return -1
+    if (taskA.props.task.priority === HIGH) return -1
+    if (taskA.props.task.priority === LOW) return 1
+
+    return 0
   }
 
   handleRemoveTask = id => {
@@ -19,22 +30,20 @@ class List extends React.Component {
     remove(id)
   }
 
-  handleChangeStatus = id => {
-    const { change } = this.props
-    change(id)
-  }
-
   handleShowPopup = () => {
-    this.setState({ showPopup: !this.state.showPopup })
+    this.setState({
+      showPopup: !this.state.showPopup,
+    })
   }
 
-  getLastTaskId = tasks =>
-    tasks.length > 0 && tasks[tasks.length - 1].id
+  handleChangeStatus = id => {
+    const { changeStatus } = this.props
+    changeStatus(id)
+  }
 
   render() {
-    const { tasks, add } = this.props
+    const { tasks } = this.props
     const { showPopup } = this.state
-    const lastTaskId = this.getLastTaskId(tasks)
 
     return (
       <div
@@ -47,7 +56,13 @@ class List extends React.Component {
           margin: '0 auto',
         }}
       >
-        <h2>Tasks</h2>
+        {tasks.length <= 0 ? (
+          <h6 style={{ marginTop: '25px', textAlign: 'center' }}>
+            You don't have any tasks yet
+          </h6>
+        ) : (
+          <h2>Your tasks</h2>
+        )}
         <div style={{ position: 'absolute', left: '0', top: '0' }}>
           <MainButton
             button="success"
@@ -62,26 +77,20 @@ class List extends React.Component {
             width: '100%',
           }}
         >
-          {tasks.length <= 0 ? (
-            <h5 style={{ textAlign: 'center', marginTop: '15px' }}>
-              You don't have any tasks
-            </h5>
-          ) : (
-            tasks
-              .map(task => (
-                <Task
-                  key={task.id}
-                  task={task}
-                  handleRemove={this.handleRemoveTask}
-                  handleChangeStatus={this.handleChangeStatus}
-                />
-              ))
-              .reverse()
-          )}
-          <AppPoup
+          {tasks
+            .map(task => (
+              <Task
+                key={task.id}
+                task={task}
+                handleRemove={this.handleRemoveTask}
+                handleChangeStatus={this.handleChangeStatus}
+              />
+            ))
+            .reverse()
+            .sort((taskA, taskB) => this.sortTask(taskA, taskB))}
+          <SetFormBody
+            closeEditForm
             showPopup={showPopup}
-            addTask={add}
-            lastTaskId={lastTaskId}
             closePopup={this.handleShowPopup}
           />
         </div>
@@ -94,8 +103,7 @@ const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
 
 const mapDispatchToProps = {
   remove: removeTask,
-  add: addTask,
-  change: changeTaskStatus,
+  changeStatus: changeTaskStatus,
 }
 
 export default connect(
