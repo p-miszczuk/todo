@@ -11,6 +11,7 @@ const Main = () => (
     <Route path="/list/" exact component={List} />
     <Route path="/list/:id" exact component={ShowTask} />
     <Route path="/list/:id/edit" exact component={SetFormBody} />
+    <Route path="/done/" exact component={List} />
   </main>
 )
 

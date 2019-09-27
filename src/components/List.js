@@ -7,13 +7,25 @@ import {
   removeTask,
   changeTaskStatus,
 } from '../redux/reducers/todos/actions'
+import { SNAPSHOT_VERSION_WARNING } from 'jest-snapshot/build/utils'
 
 const LOW = 'low'
 const HIGH = 'high'
+const PATH = '/done/'
 
 class List extends React.Component {
   state = {
     showPopup: false,
+    showDoneTasks: false,
+  }
+
+  static getDerivedStateFromProps({ location }, state) {
+    if (location.pathname === PATH)
+      return {
+        showDoneTasks: !state.showDoneTasks,
+      }
+
+    return null
   }
 
   sortTask = (taskA, taskB) => {
@@ -42,9 +54,9 @@ class List extends React.Component {
   }
 
   render() {
-    const { tasks } = this.props
-    const { showPopup } = this.state
-
+    const { tasks, doneTasks } = this.props
+    const { showPopup, showDoneTasks } = this.state
+    console.log(this.props)
     return (
       <div
         style={{
@@ -77,17 +89,30 @@ class List extends React.Component {
             width: '100%',
           }}
         >
-          {tasks
-            .map(task => (
-              <Task
-                key={task.id}
-                task={task}
-                handleRemove={this.handleRemoveTask}
-                handleChangeStatus={this.handleChangeStatus}
-              />
-            ))
-            .reverse()
-            .sort((taskA, taskB) => this.sortTask(taskA, taskB))}
+          {!showDoneTasks &&
+            tasks
+              .map(task => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  handleRemove={this.handleRemoveTask}
+                  handleChangeStatus={this.handleChangeStatus}
+                />
+              ))
+              .reverse()
+              .sort((taskA, taskB) => this.sortTask(taskA, taskB))}
+          {!!showDoneTasks &&
+            doneTasks
+              .map(task => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  handleRemove={this.handleRemoveTask}
+                  handleChangeStatus={this.handleChangeStatus}
+                />
+              ))
+              .reverse()
+              .sort((taskA, taskB) => this.sortTask(taskA, taskB))}
           <SetFormBody
             closeEditForm
             showPopup={showPopup}
@@ -99,7 +124,10 @@ class List extends React.Component {
   }
 }
 
-const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
+const mapStateToProps = ({ todos }) => ({
+  tasks: todos.tasks,
+  doneTasks: todos.doneTasks,
+})
 
 const mapDispatchToProps = {
   remove: removeTask,

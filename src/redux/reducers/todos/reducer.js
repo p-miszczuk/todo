@@ -4,6 +4,7 @@ import {
   EDIT_TASK,
   CHANGE_STATUS,
 } from '../../reducers/todos/actions'
+import { tsAnyKeyword } from '@babel/types'
 
 const initialState = {
   tasks: [
@@ -11,7 +12,7 @@ const initialState = {
       id: 1,
       name: 'Clean the car',
       timestamp: '01.10.2019',
-      done: false,
+      done: true,
       description: 'Clean the car asap',
       comments: [],
       priority: 'high',
@@ -35,6 +36,7 @@ const initialState = {
       priority: 'medium',
     },
   ],
+  doneTasks: [],
 }
 
 const todos = (state = initialState, action) => {
@@ -43,6 +45,9 @@ const todos = (state = initialState, action) => {
       return {
         ...state,
         tasks: state.tasks.filter(task => task.id !== action.payload),
+        doneTasks: state.doneTasks.concat(
+          state.tasks.find(task => task.id === action.payload),
+        ),
       }
     case ADD_TASK:
       return {
@@ -65,6 +70,7 @@ const todos = (state = initialState, action) => {
             : task,
         ),
       }
+
     default:
       return state
   }
