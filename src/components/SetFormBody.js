@@ -143,6 +143,7 @@ class SetFormBody extends PureComponent {
     return null
   }
 }
+
 const mapStateToProps = ({ todos }) => ({ tasks: todos.tasks })
 
 const mapDispatchToProps = {

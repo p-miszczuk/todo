@@ -2,6 +2,7 @@ export const REMOVE_TASK = 'REMOVE_TASK'
 export const ADD_TASK = 'ADD_TASK'
 export const EDIT_TASK = 'EDIT_TASK'
 export const CHANGE_STATUS = 'CHANGE_STATUS'
+export const REMOVE_DONE_TASK = 'REMOVE_DONE_TASK'
 
 export const removeTask = payload => {
   return {
@@ -23,5 +24,10 @@ export const editTask = (id, payload) => ({
 
 export const changeTaskStatus = payload => ({
   type: CHANGE_STATUS,
+  payload,
+})
+
+export const removeDoneTask = payload => ({
+  type: REMOVE_DONE_TASK,
   payload,
 })

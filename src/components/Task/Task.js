@@ -4,6 +4,7 @@ import { Card, Badge } from 'react-bootstrap'
 import classNames from 'classnames'
 import Comment from './Comment'
 import './taskStyle.scss'
+import SnapshotState from 'jest-snapshot/build/State'
 
 const medium = 'medium'
 const high = 'high'
@@ -36,8 +37,13 @@ const Task = ({
     'task__edit--display': showDoneTasks,
   })
 
+  const classDisplay = classNames({
+    task: true,
+    'task--small': showDoneTasks,
+  })
+
   return (
-    <Card className="task" bg="dark" text="white">
+    <Card className={classDisplay} bg="dark" text="white">
       <Card.Header className="task__header">
         <input
           type="checkBox"

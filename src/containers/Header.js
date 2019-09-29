@@ -6,13 +6,38 @@ const Header = () => (
     <nav>
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'red',
+            }}
+            exact
+            to="/"
+          >
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/list/">List</NavLink>
+          <NavLink
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'red',
+            }}
+            to="/list/"
+          >
+            List
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/done/">Done</NavLink>
+          <NavLink
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'red',
+            }}
+            to="/done/"
+          >
+            Done
+          </NavLink>
         </li>
       </ul>
     </nav>

@@ -5,6 +5,7 @@ import SetFormBody from './SetFormBody'
 import MainButton from './Buttons/MainButton'
 import {
   removeTask,
+  removeDoneTask,
   changeTaskStatus,
 } from '../redux/reducers/todos/actions'
 
@@ -38,9 +39,9 @@ class List extends React.Component {
   }
 
   handleRemoveTask = id => {
-    const { remove } = this.props
+    const { removeActive, removeDone } = this.props
     const { showDoneTasks } = this.state
-    !showDoneTasks && remove(id)
+    showDoneTasks ? removeDone(id) : removeActive(id)
   }
 
   handleShowPopup = () => {
@@ -140,7 +141,8 @@ const mapStateToProps = ({ todos }) => ({
 })
 
 const mapDispatchToProps = {
-  remove: removeTask,
+  removeActive: removeTask,
+  removeDone: removeDoneTask,
   changeStatus: changeTaskStatus,
 }
 

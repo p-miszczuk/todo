@@ -3,8 +3,8 @@ import {
   ADD_TASK,
   EDIT_TASK,
   CHANGE_STATUS,
+  REMOVE_DONE_TASK,
 } from '../../reducers/todos/actions'
-import { tsAnyKeyword } from '@babel/types'
 
 const initialState = {
   tasks: [
@@ -47,6 +47,13 @@ const todos = (state = initialState, action) => {
         tasks: state.tasks.filter(task => task.id !== action.payload),
         doneTasks: state.doneTasks.concat(
           state.tasks.find(task => task.id === action.payload),
+        ),
+      }
+    case REMOVE_DONE_TASK:
+      return {
+        ...state,
+        doneTasks: state.doneTasks.filter(
+          task => task.id !== action.payload,
         ),
       }
     case ADD_TASK:
