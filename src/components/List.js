@@ -10,6 +10,7 @@ import {
 } from '../redux/reducers/todos/actions'
 
 const LOW = 'low'
+const MEDIUM = 'medium'
 const HIGH = 'high'
 const PATH = '/done/'
 
@@ -32,8 +33,15 @@ class List extends React.Component {
     return (
       (taskA.props.task.done > taskB.props.task.done && 1) ||
       (taskA.props.task.done < taskB.props.task.done && -1) ||
-      (taskA.props.task.priority === HIGH && -1) ||
-      (taskA.props.task.priority === LOW && 1) ||
+      (taskA.props.task.priority === HIGH &&
+        taskB.props.task.priority === MEDIUM &&
+        -1) ||
+      (taskA.props.task.priority === MEDIUM &&
+        taskB.props.task.priority === LOW &&
+        -1) ||
+      (taskA.props.task.priority === HIGH &&
+        taskB.props.task.priority === LOW &&
+        -1) ||
       0
     )
   }
@@ -41,7 +49,10 @@ class List extends React.Component {
   handleRemoveTask = id => {
     const { removeActive, removeDone } = this.props
     const { showDoneTasks } = this.state
-    showDoneTasks ? removeDone(id) : removeActive(id)
+
+    showDoneTasks
+      ? removeDone(id) && this.setState({ showDoneTasks: false })
+      : removeActive(id)
   }
 
   handleShowPopup = () => {
@@ -100,30 +111,29 @@ class List extends React.Component {
             width: '100%',
           }}
         >
-          {!showDoneTasks &&
-            tasks
-              .map(task => (
-                <Task
-                  key={task.id}
-                  task={task}
-                  handleRemove={this.handleRemoveTask}
-                  handleChangeStatus={this.handleChangeStatus}
-                />
-              ))
-              .reverse()
-              .sort((taskA, taskB) => this.sortTasks(taskA, taskB))}
-          {!!showDoneTasks &&
-            doneTasks
-              .map(task => (
-                <Task
-                  showDoneTasks={showDoneTasks}
-                  key={task.id}
-                  task={task}
-                  handleRemove={this.handleRemoveTask}
-                  handleChangeStatus={this.handleChangeStatus}
-                />
-              ))
-              .reverse()}
+          {!showDoneTasks
+            ? tasks
+                .map(task => (
+                  <Task
+                    key={task.id}
+                    task={task}
+                    handleRemove={this.handleRemoveTask}
+                    handleChangeStatus={this.handleChangeStatus}
+                  />
+                ))
+                .reverse()
+                .sort((taskA, taskB) => this.sortTasks(taskA, taskB))
+            : doneTasks
+                .map(task => (
+                  <Task
+                    showDoneTasks={showDoneTasks}
+                    key={task.id}
+                    task={task}
+                    handleRemove={this.handleRemoveTask}
+                    handleChangeStatus={this.handleChangeStatus}
+                  />
+                ))
+                .reverse()}
           <SetFormBody
             closeEditForm
             showPopup={showPopup}

@@ -8,7 +8,7 @@ const cleanForm = {
   name: '',
   description: '',
   comment: '',
-  priority: '',
+  priority: 'low',
 }
 
 class SetFormBody extends PureComponent {
@@ -17,7 +17,7 @@ class SetFormBody extends PureComponent {
       name: '',
       description: '',
       comment: '',
-      priority: '',
+      priority: 'low',
     },
   }
 

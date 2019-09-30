@@ -1,41 +1,27 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+const activeStyle = {
+  fontWeight: 'bold',
+  color: 'red',
+}
+
 const Header = () => (
   <header>
     <nav>
       <ul>
         <li>
-          <NavLink
-            activeStyle={{
-              fontWeight: 'bold',
-              color: 'red',
-            }}
-            exact
-            to="/"
-          >
+          <NavLink activeStyle={activeStyle} exact to="/">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink
-            activeStyle={{
-              fontWeight: 'bold',
-              color: 'red',
-            }}
-            to="/list/"
-          >
+          <NavLink activeStyle={activeStyle} to="/list/">
             List
           </NavLink>
         </li>
         <li>
-          <NavLink
-            activeStyle={{
-              fontWeight: 'bold',
-              color: 'red',
-            }}
-            to="/done/"
-          >
+          <NavLink activeStyle={activeStyle} to="/done/">
             Done
           </NavLink>
         </li>

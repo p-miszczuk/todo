@@ -9,6 +9,7 @@ const Input = ({
   className,
   checked,
   required = false,
+  defaultChecked,
 }) => (
   <label>
     {(type === 'text' || type === 'textarea') && label}
@@ -25,6 +26,7 @@ const Input = ({
         type={type}
         name={name}
         value={value}
+        defaultChecked={!!defaultChecked}
         onChange={onChange}
         className={className}
         checked={checked}

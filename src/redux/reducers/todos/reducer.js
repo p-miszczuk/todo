@@ -12,7 +12,7 @@ const initialState = {
       id: 1,
       name: 'Clean the car',
       timestamp: '01.10.2019',
-      done: true,
+      done: false,
       description: 'Clean the car asap',
       comments: [],
       priority: 'high',

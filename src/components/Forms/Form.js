@@ -48,7 +48,7 @@ const Form = ({
           name="priority"
           className="add-task__radio"
           value="low"
-          checked={priority === 'low'}
+          defaultChecked
           onChange={handleChange}
         />
       </div>
@@ -80,7 +80,7 @@ const Form = ({
         size="lg"
         button="outline-success"
         type="submit"
-        text={editTask ? 'Edit' : 'Add'}
+        text={editTask ? 'Save' : 'Add'}
       />
       <MainButton
         size="lg"
